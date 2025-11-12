@@ -18,6 +18,21 @@ export default function Step4Password({ password, onPasswordChange }: Step4Passw
 
   const isValid = validations.length && validations.uppercase && validations.numberOrSymbol;
 
+  // Password strength calculation
+  const getPasswordStrength = () => {
+    const score =
+      (validations.length ? 1 : 0) +
+      (validations.uppercase ? 1 : 0) +
+      (validations.numberOrSymbol ? 1 : 0);
+
+    if (score === 3) return { label: 'Strong', color: 'bg-green-500', width: 'w-full' };
+    if (score === 2) return { label: 'Medium', color: 'bg-yellow-500', width: 'w-2/3' };
+    if (score === 1) return { label: 'Weak', color: 'bg-red-500', width: 'w-1/3' };
+    return { label: 'Very Weak', color: 'bg-gray-300', width: 'w-1/6' };
+  };
+
+  const strength = getPasswordStrength();
+
   return (
     <div className="w-full max-w-2xl mx-auto">
       <div className="text-center mb-10">
@@ -57,6 +72,19 @@ export default function Step4Password({ password, onPasswordChange }: Step4Passw
               )}
             </button>
           </div>
+
+          {/* Password strength bar */}
+          {password && (
+            <div className="mt-3">
+              <div className="flex justify-between text-sm mb-1">
+                <span className="text-gray-600">Password strength:</span>
+                <span className="font-medium text-black">{strength.label}</span>
+              </div>
+              <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div className={`h-2 rounded-full ${strength.color} ${strength.width} transition-all duration-300`} />
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="bg-gray-50 rounded-2xl p-6 space-y-3">

@@ -13,10 +13,11 @@ export default function Step1Role({ selectedRole, onRoleSelect }: Step1RoleProps
         <p className="text-gray-600 text-lg">Choose the option that best describes you</p>
       </div>
 
-      <div className="space-y-4">
+      {/* Bu joyni flex qilib o‘zgartirdik */}
+      <div className="flex flex-col md:flex-row gap-4">
         <button
           onClick={() => onRoleSelect('job_seeker')}
-          className={`w-full p-6 rounded-2xl border-2 transition-all duration-300 text-left ${
+          className={`flex-1 p-6 rounded-2xl border-2 transition-all duration-300 text-left ${
             selectedRole === 'job_seeker'
               ? 'border-black bg-black text-white'
               : 'border-gray-300 bg-white text-black hover:border-gray-400'
@@ -49,7 +50,7 @@ export default function Step1Role({ selectedRole, onRoleSelect }: Step1RoleProps
 
         <button
           onClick={() => onRoleSelect('employer')}
-          className={`w-full p-6 rounded-2xl border-2 transition-all duration-300 text-left ${
+          className={`flex-1 p-6 rounded-2xl border-2 transition-all duration-300 text-left ${
             selectedRole === 'employer'
               ? 'border-black bg-black text-white'
               : 'border-gray-300 bg-white text-black hover:border-gray-400'
